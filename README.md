@@ -2,6 +2,35 @@
 
 **AI-assisted stereo direction for short-form video.** Parallax Forge is a Windows-first offline desktop application that turns conventional 2D clips into comfort-bounded red-cyan anaglyph video. It analyzes each shot, proposes bounded stereo treatment, lets an editor make shot-level adjustments, renders through an occlusion-aware pipeline, remuxes compatible source audio streams, and produces a quality-control report.
 
+## Example
+
+Put on red/cyan glasses and open the full-size image. Left is the untouched
+source; right is the Parallax Forge render.
+
+![Original 2D beside the Parallax Forge red/cyan anaglyph render](docs/assets/example-original-vs-anaglyph.png)
+
+The same frame at 1:1, where the per-object parallax is visible without glasses
+as red/cyan separation along depth edges:
+
+![Detail crop showing red and cyan separation at depth edges](docs/assets/example-detail-crop.png)
+
+Produced end to end by the pipeline described below, with no manual retouching:
+
+| | |
+| --- | --- |
+| Source | 5.8 s clip, normalised to 1280x720 at 24 fps, 140 frames |
+| Depth | Video Depth Anything Small on a 384x216 grid, certified tier, no fallback |
+| Direction | Vista Deep chosen automatically, depth strength 0.90 |
+| Composition | Dubois-calibrated red/cyan, comfort-guarded before any pixels moved |
+
+Notice that colour survives the conversion. The calibrated matrix is built to
+preserve the source palette and suppress ghosting, so a warm night scene stays
+warm; the basic red/cyan matrix trades that for stronger separation when you are
+using cheap glasses.
+
+> Source clip used for demonstration. Confirm the stock licence terms and add
+> the required attribution before publishing this repository more widely.
+
 > Product status: production-minded alpha. The deterministic engine, desktop workflow, resumable artifacts, and synthetic test path are included. Shipping the real Video Depth Anything model, FFmpeg binaries, code signing, and hardware certification are release operations that cannot be truthfully completed from source code alone.
 
 ## What is different

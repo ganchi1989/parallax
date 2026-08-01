@@ -1,0 +1,13 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main-capability",
+  "description": "Minimal permissions for the single trusted application window. Native dialogs, process control, and reveal operations remain behind typed Rust commands.",
+  "windows": ["main"],
+  "permissions": [
+    "core:app:default",
+    "core:event:default",
+    "core:path:default",
+    "core:window:default"
+  ]
+}
+

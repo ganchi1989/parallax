@@ -1,0 +1,71 @@
+# JavaScript / Svelte
+node_modules/
+dist/
+.svelte-kit/
+coverage/
+*.tsbuildinfo
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Rust / Tauri
+src-tauri/target/
+src-tauri/binaries/*.exe
+src-tauri/binaries/*-unknown-*
+!src-tauri/binaries/.gitkeep
+src-tauri/resources/tools/*.exe
+src-tauri/resources/tools/FFmpeg-LICENSE.txt
+src-tauri/resources/tools/FFmpeg-SOURCE.txt
+src-tauri/resources/models/*.torchscript
+src-tauri/resources/models/DEPTH-MODEL.sha256
+src-tauri/resources/models/DEPTH-MODEL-LICENSE.txt
+src-tauri/resources/models/DEPTH-MODEL-SOURCE.txt
+
+# Product data (never commit customer media or model weights)
+projects/
+work/
+renders/
+models/
+checkpoints/
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.npz
+*.pth
+*.pt
+*.safetensors
+
+# Packaging
+build/
+release/
+*.spec.local
+
+# Verified project-local development tools (provisioned by bootstrap)
+.dev-tools/
+
+# Local configuration / secrets
+.env
+.env.*
+!.env.example
+*.local.json
+
+# Agent/session runtime logs (local build output, not project source)
+.codex/runtime/
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini

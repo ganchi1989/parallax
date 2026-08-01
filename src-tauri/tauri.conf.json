@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Parallax Forge",
+  "version": "0.1.0",
+  "identifier": "com.parallaxforge.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Parallax Forge - AI Stereo Director",
+        "width": 1440,
+        "height": 900,
+        "minWidth": 1100,
+        "minHeight": 700,
+        "center": true,
+        "resizable": true,
+        "fullscreen": false,
+        "maximized": false,
+        "decorations": true,
+        "transparent": false,
+        "visible": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' asset: http://asset.localhost blob: data:; media-src 'self' asset: http://asset.localhost blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src ipc: http://ipc.localhost; script-src 'self'",
+      "assetProtocol": {
+        "enable": true,
+        "scope": []
+      },
+      "capabilities": ["main-capability"]
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico"
+    ],
+    "externalBin": ["binaries/aistereo-worker"],
+    "resources": {
+      "resources/tools/ffmpeg.exe": "tools/ffmpeg.exe",
+      "resources/tools/ffprobe.exe": "tools/ffprobe.exe",
+      "resources/tools/FFmpeg-LICENSE.txt": "notices/FFmpeg-LICENSE.txt",
+      "resources/tools/FFmpeg-SOURCE.txt": "notices/FFmpeg-SOURCE.txt",
+      "resources/models/video_depth_anything_small.torchscript": "models/video_depth_anything_small.torchscript",
+      "resources/models/DEPTH-MODEL.sha256": "models/DEPTH-MODEL.sha256",
+      "resources/models/DEPTH-MODEL-LICENSE.txt": "notices/DEPTH-MODEL-LICENSE.txt",
+      "resources/models/DEPTH-MODEL-SOURCE.txt": "notices/DEPTH-MODEL-SOURCE.txt"
+    },
+    "shortDescription": "Offline, shot-aware 2D to anaglyph conversion",
+    "longDescription": "AI Stereo Director converts local video clips into comfortable, shot-aware red-cyan anaglyph video while preserving source timing and audio."
+  }
+}

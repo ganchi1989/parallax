@@ -1,0 +1,46 @@
+[package]
+name = "parallax-forge"
+version = "0.1.0"
+description = "Secure desktop host for Parallax Forge - AI Stereo Director"
+authors = ["Parallax Forge contributors"]
+license = "Proprietary"
+edition = "2021"
+rust-version = "1.88"
+build = "build.rs"
+
+[lib]
+name = "parallax_forge_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "parallax-forge"
+path = "src/main.rs"
+
+[build-dependencies]
+serde_json = "1"
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+tauri = { version = "2", features = ["protocol-asset"] }
+tauri-plugin-dialog = "2"
+tauri-plugin-opener = "2"
+tauri-plugin-shell = "2"
+thiserror = "2"
+uuid = { version = "1", features = ["v4"] }
+zeroize = "1"
+
+[target.'cfg(windows)'.dependencies]
+keyring = { version = "4.1", default-features = false, features = ["v1", "windows-native-keyring-store"] }
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = "symbols"

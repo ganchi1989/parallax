@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "media": {"target_fps": 24.0, "target_height": 720, "crf": 18, "working_preset": "veryfast", "preset": "medium"},
+  "shots": {"backend": "auto", "content_threshold": 27.0, "min_scene_frames": 12},
+  "depth": {"backend": "synthetic", "width": 384, "height": 216, "temporal_alpha": 0.82},
+  "comfort": {
+    "max_popout_disparity_norm": 0.004,
+    "max_background_disparity_norm": 0.010,
+    "max_depth_strength": 1.0,
+    "max_convergence_change": 0.18
+  },
+  "render": {"anaglyph_mode": "calibrated", "swap_eyes": false, "gamma": 2.2},
+  "llm": {"enabled": false, "provider": "openai-responses", "model": "gpt-5.6-terra"}
+}

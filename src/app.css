@@ -1,0 +1,82 @@
+:root {
+  font-family: Inter, "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  color: #d7dce4;
+  background: #080a0f;
+  --font-mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  --titlebar-height: 48px;
+  --timeline-height: 145px;
+  --accent: #65d3c6;
+  --text: #d7dce4;
+  --text-dim: #8a94a2;
+  --text-muted: #626c7b;
+  --line: #262d36;
+  --line-soft: #1c222a;
+  --surface-hover: #171c23;
+}
+
+* { box-sizing: border-box; }
+html, body, #app { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body { min-width: 720px; min-height: 540px; background: #080a0f; font-size: 12px; }
+button, input, select { font: inherit; }
+button { min-height: 32px; cursor: pointer; }
+select, input:not([type="range"]):not([type="radio"]):not([type="checkbox"]) { min-height: 32px; }
+button:disabled { cursor: not-allowed; }
+button:focus-visible, input:focus-visible, select:focus-visible, [role="button"]:focus-visible { outline: 2px solid rgba(101,211,198,.82); outline-offset: 2px; }
+::selection { color: #07110f; background: #6dd7ca; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #262d37; border: 2px solid transparent; background-clip: padding-box; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background-color: #343d49; }
+
+.app-shell { width: 100%; height: 100%; overflow: hidden; background: #080a0f; }
+.app-underlay { width: 100%; height: 100%; overflow: hidden; }
+.editor-stack {
+  height: calc(100% - var(--titlebar-height));
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.editor-workspace {
+  height: auto;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(205px, 238px) minmax(420px, 1fr) minmax(275px, 310px);
+  grid-template-rows: minmax(0, 1fr) var(--timeline-height);
+  grid-template-areas: "shots preview director" "timeline timeline timeline";
+  min-width: 0;
+  min-height: 0;
+}
+.editor-workspace.shots-hidden { grid-template-columns: minmax(480px,1fr) minmax(275px,310px); grid-template-areas: "preview director" "timeline timeline"; }
+.editor-workspace > .shot-panel { grid-area: shots; }
+.editor-workspace > .preview-panel { grid-area: preview; }
+.editor-workspace > .director-panel { grid-area: director; }
+.timeline-slot { grid-area: timeline; min-width: 0; min-height: 0; }
+.reduce-motion *, .reduce-motion *::before, .reduce-motion *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
+
+.shortcut-backdrop { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; background: rgba(2,4,7,.72); backdrop-filter: blur(7px); }
+.shortcut-modal { width: min(460px, 90vw); border: 1px solid #343c48; background: #0e1117; border-radius: 11px; box-shadow: 0 30px 90px rgba(0,0,0,.65); overflow: hidden; }
+.shortcut-modal header { height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; border-bottom: 1px solid var(--line-soft); background: #11151b; }
+.shortcut-modal header > div { display: flex; align-items: center; gap: 8px; color: #6ed4c7; }
+.shortcut-modal h2 { font-size: 12px; color: #d6dce4; margin: 0; }
+.shortcut-modal header button { width: 26px; height: 26px; display: grid; place-items: center; border: 0; background: transparent; color: #65707e; border-radius: 5px; }
+.shortcut-grid { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 11px 20px; padding: 18px 20px; font-size: 11px; color: #7a8492; }
+.shortcut-grid > div { display: flex; align-items: center; gap: 4px; }
+kbd { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; border: 1px solid #39414c; border-bottom-color: #4c5663; border-radius: 4px; background: #181d24; color: #aeb6c1; font: 10px var(--font-mono); box-shadow: 0 1px 1px #000; }
+.shortcut-modal footer { min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 6px; border-top: 1px solid var(--line-soft); color: #5c6674; font-size: 10px; }
+.shortcut-modal footer kbd { height: 16px; min-width: 16px; }
+
+@media (max-width: 1100px) {
+  :root { --timeline-height: 135px; }
+  .editor-workspace { grid-template-columns: minmax(190px, 210px) minmax(360px,1fr) minmax(260px,280px); }
+}
+@media (max-width: 900px) {
+  .editor-workspace { grid-template-columns: minmax(0,1fr) 270px; grid-template-areas: "preview director" "timeline timeline"; }
+  .editor-workspace > .shot-panel { display: none; }
+}

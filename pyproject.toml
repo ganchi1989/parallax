@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-stereo-director"
+version = "0.1.0"
+description = "Offline, shot-aware 2D to comfortable red-cyan stereo conversion"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+dependencies = [
+  # NumPy 2.5 requires Python 3.12 and its stubs cannot be type-checked for
+  # this application's supported Python 3.11 baseline.
+  "numpy>=1.26,<2.5",
+  "pydantic>=2.7,<3",
+  "typer>=0.12,<1",
+]
+
+[project.optional-dependencies]
+# OpenCV is Apache-2.0; PySceneDetect is BSD-3-Clause.
+video = ["opencv-python-headless>=4.9,<5", "scenedetect>=0.6.4,<0.7"]
+# PyTorch uses its BSD-style license. Video Depth Anything Small is Apache-2.0;
+# model code/weights are intentionally not downloaded or bundled by this package.
+depth = ["torch>=2.2,<3"]
+# Test/development tools: pytest (MIT), Ruff (MIT), mypy (MIT).
+dev = ["pytest>=8,<9", "ruff>=0.6,<1", "mypy>=1.11,<2"]
+# Release-only freezer. Keep exact: the generated bootloader is shipped.
+packaging = ["pyinstaller==6.21.0"]
+
+[project.scripts]
+aistereo = "aistereo.cli:main"
+aistereo-worker = "aistereo.worker:main"
+
+[tool.setuptools]
+package-dir = { "" = "python" }
+
+[tool.setuptools.packages.find]
+where = ["python"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["python", "tests/python"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+# Typer's documented declarative API intentionally constructs metadata in defaults.
+"python/aistereo/cli.py" = ["B008"]
+
+[tool.mypy]
+python_version = "3.11"
+packages = ["aistereo"]
+strict = true
+warn_unreachable = true
+# NumPy's runtime ndarray annotations are intentionally shape-agnostic here;
+# array dtype/shape contracts are validated at public boundaries and in tests.
+disable_error_code = ["type-arg", "no-any-return", "unused-ignore"]

@@ -2,6 +2,17 @@
 
 **AI-assisted stereo direction for short-form video.** Parallax Forge is a Windows-first offline desktop application that turns conventional 2D clips into comfort-bounded red-cyan anaglyph video. It analyzes each shot, proposes bounded stereo treatment, lets an editor make shot-level adjustments, renders through an occlusion-aware pipeline, remuxes compatible source audio streams, and produces a quality-control report.
 
+## The application
+
+![Parallax Forge in Compare view: analysis rail complete, split original and directed anaglyph, Director panel with preset and stereo geometry](docs/assets/app-screenshot.png)
+
+A finished shot in Compare view. The rail across the top tracks the eight
+analysis stages; the split viewer wipes between the untouched source and the
+directed anaglyph; the right panel holds the chosen preset and the bounded
+stereo geometry. The shot browser marks which shots have been rendered, and the
+title bar shows no depth warning because this project used the certified model,
+so export is unlocked.
+
 ## Example
 
 Put on red/cyan glasses and open the full-size image. Left is the untouched
